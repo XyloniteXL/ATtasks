@@ -30,8 +30,9 @@ public class FirstTest {
         inputfield.sendKeys("погода пенза");
         WebElement searchbutt = driver.findElement(By.cssSelector("button[type='submit']"));
         searchbutt.click();
-        String prognozlink = driver.findElement(By.cssSelector("a[accesskey*='1']")).getText();
-        Assert.assertTrue(prognozlink.contains("Погода"));
+        WebElement prognozlink = driver.findElement(By.cssSelector("a[accesskey*='1']"));
+        String txtprognozlink = prognozlink.getText();
+        Assert.assertTrue(txtprognozlink.contains("Погода"));
     }
     @AfterClass
     public static void finish() {
