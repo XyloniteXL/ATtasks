@@ -27,5 +27,9 @@ public class PoiskPage {
     }
     public void clickSearchButt(){
         searchbutt.click();
+
+    }
+    public void goPage(){
+        driver.get("https://ya.ru/");
     }
 }

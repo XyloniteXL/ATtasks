@@ -25,13 +25,18 @@ public class ManageDriver {
         poiskPage = new PoiskPage(driver);
         poiskResult = new PoiskResult(driver);
         driver.manage().window().maximize();
-        driver.manage().timeouts().implicitlyWait(15, TimeUnit.SECONDS);
-        driver.get("https://ya.ru/");
+        driver.manage().timeouts().implicitlyWait(5, TimeUnit.SECONDS);
+
     }
+
     @AfterClass
     public static void finish() {
-        //WebElement onmain = driver.findElement(By.cssSelector("a[class*='ys-ru']"));
-        //onmain.click();
+        poiskResult.goHome();
+        try {
+            Thread.sleep(5000);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
         driver.quit();
     }
 }

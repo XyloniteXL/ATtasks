@@ -15,38 +15,14 @@ import java.util.concurrent.TimeUnit;
 
 public class FirstTest extends ManageDriver{
 
-    private static WebDriver driver;
 
-    /*@BeforeClass
-    public static void start() {
-        ///System.setProperty("webdriver.chrome.driver", "c:/Users/MacPro/Work/chromedriver.exe");
-        driver = new ChromeDriver();
-        driver.manage().window().maximize();
-        driver.manage().timeouts().implicitlyWait(15, TimeUnit.SECONDS);
-        driver.get("https://ya.ru/");
-    }*/
     @Test
     public void SearchWeather(){
-        poiskPage.inputINsearch("Погода пенза");
+        poiskPage.goPage();
+        poiskPage.inputINsearch("погода пенза");
         poiskPage.clickSearchButt();
-
-    }
-    @Test
-    public void Weatherintown() {
-        /*WebElement inputfield = driver.findElement(By.cssSelector("input[tabindex='2']"));
-        inputfield.sendKeys("погода пенза");
-        WebElement searchbutt = driver.findElement(By.cssSelector("button[type='submit']"));
-        searchbutt.click();
-        WebElement prognozlink = driver.findElement(By.cssSelector("a[accesskey*='1']"));*/
-
         String txtprognozlink = poiskResult.getTxtPrognozLink();
         Assert.assertTrue(txtprognozlink.contains("Погода"));
-    }
 
-   /* @AfterClass
-    public static void finish() {
-        //WebElement onmain = driver.findElement(By.cssSelector("a[class*='ys-ru']"));
-        //onmain.click();
-        driver.quit();
-    }*/
+    }
 }

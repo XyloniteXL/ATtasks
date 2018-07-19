@@ -16,8 +16,15 @@ public class PoiskResult {
     @FindBy (css = "a[accesskey*='1']")
     private WebElement prognozlink;
 
+    @FindBy(css = "a[class*='ys-ru']")
+    private WebElement onmain;
+
     public String getTxtPrognozLink(){
         String txtprognozlink = prognozlink.getText();
         return txtprognozlink;
+    }
+
+    public void goHome(){
+        onmain.click();
     }
 }
