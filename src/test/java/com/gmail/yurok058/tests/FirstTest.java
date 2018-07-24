@@ -1,28 +1,42 @@
 package com.gmail.yurok058.tests;
 
-import com.gmail.yurok058.pages.PoiskPage;
-import org.openqa.selenium.By;
-import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.WebElement;
-import org.openqa.selenium.chrome.ChromeDriver;
-import org.openqa.selenium.support.ui.WebDriverWait;
+import com.gmail.yurok058.pages.YaMain;
+import com.gmail.yurok058.pages.YaLocation;
 import org.testng.Assert;
-import org.testng.annotations.AfterClass;
-import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Test;
 
-import java.util.concurrent.TimeUnit;
+import java.util.List;
 
 public class FirstTest extends ManageDriver{
+    public static YaMain yaMain;
+    public static YaLocation yaLocation;
+
+    final String LONDON = "Лондон";
+    final String PARIS = "Париж";
 
 
     @Test
     public void SearchWeather(){
-        poiskPage.goPage();
-        poiskPage.inputINsearch("погода пенза");
-        poiskPage.clickSearchButt();
-        String txtprognozlink = poiskResult.getTxtPrognozLink();
-        Assert.assertTrue(txtprognozlink.contains("Погода"));
+        List<String> moreListLinksL;
+        List<String> moreListLinksP;
+
+        yaMain = new YaMain(driver);
+        yaLocation = new YaLocation(driver);
+
+        yaMain.goPage();
+
+        yaMain.clickLocLink();
+        yaLocation.changeLocation(LONDON);
+        moreListLinksL = yaMain.getMoreElementsLinks(LONDON);
+
+        yaMain.clickLocLink();
+        yaLocation.changeLocation(PARIS);
+        moreListLinksP = yaMain.getMoreElementsLinks(PARIS);
+
+        for (int i = 0; i < moreListLinksL.size(); i++) {
+            Assert.assertEquals(moreListLinksL.get(i), moreListLinksP.get(i));
+
+        }
 
     }
 }
